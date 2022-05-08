@@ -1,15 +1,9 @@
-import React from "react"
+import React from "react";
 
-interface LoaderProps {
-
-}
+interface LoaderProps {}
 
 const Loader: React.FC<LoaderProps> = ({}) => {
-  return (
-    <div>
-      Loader
-    </div>
-  )
+  return <div className="loader-container"><div  className="loader-circle"/></div>;
 };
 
 export default Loader;

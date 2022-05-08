@@ -133,11 +133,11 @@ body {
   }
 
   .welcome-wrapper {
-    @apply flex md:flex-row flex-col items-start justify-between md:p-20 py-12 px-4;
+    @apply flex mf:flex-row flex-col items-start justify-between md:p-20 py-12 px-4;
   }
 
   .welcome-header {
-    @apply flex flex-1 justify-start flex-col md:mr-10;
+    @apply flex flex-1 justify-start flex-col mf:mr-10;
   }
 
   .welcome-title {
@@ -161,10 +161,30 @@ body {
   }
 
   .right-side-welcome {
-    @apply flex flex-col flex-1 items-center justify-start w-full md:mt-0 mt-10;
+    @apply flex flex-col flex-1 items-center justify-start w-full mf:mt-0 mt-10;
   }
 
   .right-side-wrapper {
     @apply p-3 justify-end items-start flex-col rounded-xl h-40 sm:w-72 w-full my-5 eth-card white-glassmorphism;
+  }
+
+  .form-container {
+    @apply p-5 sm:w-96 w-full flex flex-col justify-start items-center blue-glassmorphism;
+  }
+
+  .form-input {
+    @apply my-2 w-full rounded-sm py-2 px-3 outline-none bg-transparent text-white border-none text-sm white-glassmorphism;
+  }
+
+  .form-submit-btn {
+    @apply text-white w-full mt-2 border-[1px] p-2 border-[#3D4F7C] rounded-full cursor-pointer;
+  }
+
+  .loader-container {
+    @apply flex justify-center items-center py-3;
+  }
+
+  .loader-circle {
+    @apply animate-spin rounded-full h-16 w-16 border-b-2 border-red-700;
   }
 }

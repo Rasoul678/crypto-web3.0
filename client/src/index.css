@@ -191,4 +191,36 @@ body {
   .loader-circle {
     @apply animate-spin rounded-full h-16 w-16 border-b-2 border-red-700;
   }
+
+  .services-container {
+    @apply flex w-full justify-center items-center gradient-bg-services;
+  }
+
+  .services-wrapper {
+    @apply flex mf:flex-row flex-col items-center justify-between md:p-20 py-12 px-4;
+  }
+
+  .services-description-wrapper {
+    @apply flex-1 flex flex-col justify-start items-start;
+  }
+
+  .services-header {
+    @apply text-white text-3xl sm:text-5xl py-2 text-gradient;
+  }
+
+  .services-description {
+    @apply text-left my-2 text-white font-light md:w-9/12 w-11/12 text-base;
+  }
+
+  .services-card-wrapper {
+    @apply flex-1 flex flex-col justify-start items-center;
+  }
+
+  .services-card-container {
+    @apply flex flex-row justify-start items-start white-glassmorphism p-3 m-2 cursor-pointer hover:shadow-xl;
+  }
+
+  .card-icon-wrappr {
+    @apply w-10 h-10 rounded-full flex justify-center items-center;
+  }
 }

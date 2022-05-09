@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { TransactionContext } from "../../context/TransactionContext";
 import Input from "./Input";
 import Loader from "./Loader";
 
 interface FormProps {}
 
 const Form: React.FC<FormProps> = ({}) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const { setFormData, formData, sendTransaction } =
+    useContext(TransactionContext);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
-  const handleSubmit = () => {};
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData?.((previousState) => ({
+      ...previousState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const { addressTo, amount, keyword, message } = formData!;
+    e.preventDefault();
+
+    if (!addressTo || !amount || !keyword || !message) return;
+
+    sendTransaction?.();
+  };
 
   return (
     <div className="form-container">

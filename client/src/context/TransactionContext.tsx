@@ -15,6 +15,8 @@ interface ProviderValueProps {
   setFormData?: React.Dispatch<React.SetStateAction<FormData>>;
   formData?: FormData;
   sendTransaction?: () => void;
+  transactions?: any;
+  isLoading?: boolean;
 }
 
 export const TransactionContext = createContext<ProviderValueProps>({});
@@ -41,6 +43,7 @@ const TransactionProvider: React.FC<TransactionProviderProps> = (props) => {
   const { children } = props;
   const [currentAccount, setCurrentAccount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [transactions, setTransactions] = useState([]);
   const [transactionCount, setTransactionCount] = useState(
     localStorage.getItem("transactionCount")
   );
@@ -50,6 +53,32 @@ const TransactionProvider: React.FC<TransactionProviderProps> = (props) => {
     keyword: "",
     message: "",
   });
+
+  const getAllTransactions = async () => {
+    try {
+      checkMetamask();
+      const transactionContract = getEthereumContract();
+      const availableTransactions =
+        await transactionContract.getAllTransactions();
+
+      const structuredTransactions = availableTransactions.map(
+        (transaction: any) => ({
+          addressTo: transaction.receiver,
+          addressFrom: transaction.sender,
+          timestamp: new Date(
+            transaction.timestamp.toNumber() * 1000
+          ).toLocaleString(),
+          message: transaction.message,
+          keyword: transaction.keyword,
+          amount: parseInt(transaction.amount._hex) / 10 ** 18,
+        })
+      );
+
+      setTransactions(structuredTransactions);
+    } catch (error) {
+      catchError(error);
+    }
+  };
 
   const catchError = (error: unknown) => {
     console.log(error);
@@ -70,11 +99,21 @@ const TransactionProvider: React.FC<TransactionProviderProps> = (props) => {
 
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
-
-        // getAllTransactions();
+        getAllTransactions();
       } else {
         console.log("No accounts found!");
       }
+    } catch (error) {
+      catchError(error);
+    }
+  };
+
+  const checkIfTransactionExist = async () => {
+    try {
+      const transactionContract = getEthereumContract();
+      const transactionCount = await transactionContract.getTransactionCount();
+
+      localStorage.setItem("transactionCount", transactionCount);
     } catch (error) {
       catchError(error);
     }
@@ -133,6 +172,7 @@ const TransactionProvider: React.FC<TransactionProviderProps> = (props) => {
       const transactionCount = await transactionContract.getTransactionCount();
 
       setTransactionCount(transactionCount.toNumber());
+      window.location.reload();
     } catch (error) {
       catchError(error);
     }
@@ -140,6 +180,7 @@ const TransactionProvider: React.FC<TransactionProviderProps> = (props) => {
 
   useEffect(() => {
     setupIfWalletIsConnected();
+    checkIfTransactionExist();
   }, []);
 
   return (
@@ -150,6 +191,8 @@ const TransactionProvider: React.FC<TransactionProviderProps> = (props) => {
         setFormData,
         formData,
         sendTransaction,
+        transactions,
+        isLoading,
       }}
     >
       {children}

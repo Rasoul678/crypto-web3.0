@@ -223,4 +223,34 @@ body {
   .card-icon-wrappr {
     @apply w-10 h-10 rounded-full flex justify-center items-center;
   }
+
+  .transaction-card-wrapper {
+    @apply bg-[#181918] m-4 flex flex-1
+      2xl:min-w-[450px]
+      2xl:max-w-[500px]
+      sm:min-w-[270px]
+      sm:max-w-[300px]
+      min-w-full
+      flex-col p-3 rounded-md hover:shadow-2xl;
+  }
+
+  .footer-container {
+    @apply w-full flex md:justify-center justify-between items-center flex-col p-4 gradient-bg-footer;
+  }
+
+  .footer-items {
+    @apply w-full flex sm:flex-row flex-col justify-between items-center my-4;
+  }
+
+  .footer-logo-wrapper {
+    @apply flex flex-[0.5] justify-center items-center;
+  }
+
+  .footer-items-wrapper {
+    @apply flex flex-1 justify-evenly items-center flex-wrap sm:mt-0 mt-5 w-full;
+  }
+
+  .footer-item {
+    @apply text-white text-base text-center mx-2 cursor-pointer;
+  }
 }

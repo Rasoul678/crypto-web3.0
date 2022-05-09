@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { TransactionContext } from "../../context/TransactionContext";
 import Input from "./Input";
 import Loader from "./Loader";
@@ -6,8 +6,7 @@ import Loader from "./Loader";
 interface FormProps {}
 
 const Form: React.FC<FormProps> = ({}) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { setFormData, formData, sendTransaction } =
+  const { setFormData, formData, sendTransaction, isLoading } =
     useContext(TransactionContext);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

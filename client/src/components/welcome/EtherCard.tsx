@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { BsInfoCircle } from "react-icons/bs";
 import { SiEthereum } from "react-icons/si";
 import { TransactionContext } from "../../context/TransactionContext";
+import { shortenAddress } from "../../utils/shortenAddress";
 
 interface EtherCardProps {}
 
@@ -18,7 +19,9 @@ const EtherCard: React.FC<EtherCardProps> = ({}) => {
           <BsInfoCircle fontSize={17} color="#FFF" />
         </div>
         <div>
-          <p className="text-white font-light text-sm">{currentAccount}</p>
+          <p className="text-white font-light text-sm">
+            {shortenAddress(currentAccount!)}
+          </p>
           <p className="text-white font-smibold text-lg mt-1">Ethereum</p>
         </div>
       </div>
